@@ -1,0 +1,39 @@
+/* Базові налаштування для всієї сторінки */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Стилізація заголовків */
+h1 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #2980b9;
+    margin-top: 20px;
+}
+
+/* Списки */
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+/* Посилання (псевдоклас :hover) */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2c3e50;
+}

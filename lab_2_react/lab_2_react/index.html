@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lab_2_react</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+    // 1. Визначаємо ОС та Браузер (бо у тебе там теж "Визначається...")
+    window.onload = function() {
+        const os = navigator.platform;
+        const ua = navigator.userAgent;
+        let browser = "Невідомий";
+        if (ua.includes("Chrome")) browser = "Google Chrome";
+        else if (ua.includes("Firefox")) browser = "Mozilla Firefox";
+        else if (ua.includes("Opera") || ua.includes("OPR")) browser = "Opera";
+
+        // Знаходимо елементи по тексту і оновлюємо їх
+        document.body.innerHTML = document.body.innerHTML
+            .replace("Ваша ОС: Визначається...", "Ваша ОС: " + os)
+            .replace("Браузер: Визначається...", "Браузер: " + browser);
+
+        // 2. Завантажуємо відгуки (Варіант 19)
+        const reviewsContainer = document.querySelector('h2').parentElement; 
+        // Шукаємо текст "Завантаження відгуків..."
+        const loadingText = document.body.innerHTML.match(/Завантаження відгуків\.\.\./);
+
+        if (loadingText) {
+            // Імітуємо затримку завантаження, як у реальному API
+            setTimeout(() => {
+                const reviews = [
+                    { name: "Олексій", text: "Чудовий сервіс, все працює швидко!" },
+                    { name: "Марія", text: "Дуже зручний інтерфейс, дякую за допомогу." },
+                    { name: "Іван", text: "Лабораторна №4 виконана на відмінно." }
+                ];
+
+                let html = "<ul>";
+                reviews.forEach(r => {
+                    html += `<li><strong>${r.name}:</strong> ${r.text}</li>`;
+                });
+                html += "</ul>";
+
+                document.body.innerHTML = document.body.innerHTML.replace("Завантаження відгуків...", html);
+            }, 1000);
+        }
+    };
+</script>
+  </body>
+</html>

@@ -10,9 +10,8 @@ export default function App() {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    // Автоматичне перемикання теми залежно від часу [cite: 154]
+    // Автоматичне перемикання теми (07:00 - 21:00)
     const hours = new Date().getHours();
-    // Денна тема: від 07:00 до 21:00 [cite: 155]
     if (hours >= 7 && hours < 21) {
       setTheme('light');
     } else {
@@ -20,14 +19,14 @@ export default function App() {
     }
   }, []);
 
-  // Функція для ручного перемикання [cite: 156]
   const toggleTheme = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (
-    // Застосовуємо клас теми до головного контейнера [cite: 157]
-    <div className={`min-h-screen transition-colors duration-500 ${theme === 'dark' ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-900'}`}>
+    <div className={`min-h-screen transition-colors duration-500 ${
+      theme === 'dark' ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-900'
+    }`}>
       
       <button 
         onClick={toggleTheme} 
@@ -38,16 +37,14 @@ export default function App() {
       
       <Header />
       
-      <main className="container mx-auto px-4">
+      <main className="container mx-auto px-4 py-10">
         <Education />
         <Skills />
-        {/* Компонент відгуків для 19-го варіанту [cite: 135] */}
         <Reviews />
       </main>
 
       <Footer />
       
-      {/* Модальне вікно з'явиться через 1 хв [cite: 144] */}
       <ContactForm />
     </div>
   );

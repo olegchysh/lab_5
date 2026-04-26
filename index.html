@@ -2,11 +2,16 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Моє Резюме</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - Степан Ткачишин (Лаб 4)</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Степан</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Степан Ткачишин</h1>
+            <button id="theme-toggle" style="padding: 10px; cursor: pointer;">Змінити тему</button>
+        </div>
         <p>Студент кафедри систем захисту інформації</p>
         <nav>
             <a href="#contacts">Контакти</a>
@@ -17,22 +22,99 @@
         <section id="education">
             <h2>Освіта</h2>
             <ul>
-                <li><strong>Львівська політехніка</strong> — Кібербезпека та захист інформації</li>
+                <li><strong>Львівська політехніка</strong> — Кібербезпека та захист інформації [cite: 10, 255]</li>
             </ul>
         </section>
 
         <section id="skills">
             <h2>Навички</h2>
             <ul>
-                <li>Основи Python</li>
+                <li>Основи Python [cite: 257]</li>
                 <li>OSINT та аналіз вразливостей</li>
-                <li>Робота з Git</li>
+                <li>Робота з Git [cite: 261]</li>
             </ul>
+        </section>
+
+        <section id="reviews-section">
+            <h2>Відгуки (Варіант 19) [cite: 126]</h2>
+            <div id="reviews-list">Завантаження відгуків...</div>
         </section>
     </main>
 
     <footer id="contacts">
-        <p>Email: example@lpnu.ua</p>
+        <p>Email: stepan-oleh.tkachyshyn.kb.2023@lpnu.ua</p>
+        <hr>
+        <div id="footer-system-info">
+            <p><strong>Ваша ОС:</strong> <span id="os-info">Визначається...</span></p>
+            <p><strong>Браузер:</strong> <span id="browser-info">Визначається...</span></p>
+        </div>
+        <p>© 2026 Степан - Лабораторна робота №4 [cite: 401]</p>
     </footer>
+
+    <script src="script.js"></script>
+    <div id="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
+    <div style="background:white; padding:30px; border-radius:10px; width:90%; max-width:400px; color:#333;">
+        <h3 style="margin-top:0;">Форма зворотнього зв'язку</h3>
+        <form action="https://formspree.io/f/mojkzdqk" method="POST" style="display:flex; flexDirection:column;">
+            <label style="display:block; margin-bottom:5px;">Ім'я:</label>
+            <input type="text" name="name" required style="width:100%; padding:8px; margin-bottom:15px; border-radius:4px; border:1px solid #ccc;">
+            
+            <label style="display:block; margin-bottom:5px;">Email:</label>
+            <input type="email" name="email" required style="width:100%; padding:8px; margin-bottom:15px; border-radius:4px; border:1px solid #ccc;">
+            
+            <label style="display:block; margin-bottom:5px;">Номер телефону:</label>
+            <input type="tel" name="phone" required style="width:100%; padding:8px; margin-bottom:15px; border-radius:4px; border:1px solid #ccc;">
+            
+            <label style="display:block; margin-bottom:5px;">Повідомлення:</label>
+            <textarea name="message" required style="width:100%; padding:8px; margin-bottom:15px; border-radius:4px; border:1px solid #ccc; min-height:80px;"></textarea>
+            
+            <div style="display:flex; justify-content:space-between;">
+                <button type="submit" style="background:#28a745; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Відправити</button>
+                <button type="button" onclick="document.getElementById('modal-overlay').style.display='none'" style="background:#dc3545; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Закрити</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    // 1. Визначаємо ОС та Браузер (бо у тебе там теж "Визначається...")
+    window.onload = function() {
+        const os = navigator.platform;
+        const ua = navigator.userAgent;
+        let browser = "Невідомий";
+        
+        if (ua.includes("Chrome")) browser = "Google Chrome";
+        else if (ua.includes("Firefox")) browser = "Mozilla Firefox";
+        else if (ua.includes("Opera") || ua.includes("OPR")) browser = "Opera";
+
+        // Знаходимо елементи по тексту і оновлюємо їх
+        document.body.innerHTML = document.body.innerHTML
+            .replace("Ваша ОС: Визначається...", "Ваша ОС: " + os)
+            .replace("Браузер: Визначається...", "Браузер: " + browser);
+
+        // 2. Завантажуємо відгуки (Варіант 19)
+        const reviewsContainer = document.querySelector('h2').parentElement; 
+        // Шукаємо текст "Завантаження відгуків..."
+        const loadingText = document.body.innerHTML.match(/Завантаження відгуків\.\.\./);
+
+        if (loadingText) {
+            // Імітуємо затримку завантаження, як у реальному API
+            setTimeout(() => {
+                const reviews = [
+                    { name: "Олексій", text: "Чудовий сервіс, все працює швидко!" },
+                    { name: "Марія", text: "Дуже зручний інтерфейс, дякую за допомогу." },
+                    { name: "Іван", text: "Лабораторна №4 виконана на відмінно." }
+                ];
+
+                let html = "<ul>";
+                reviews.forEach(r => {
+                    html += `<li><strong>${r.name}:</strong> ${r.text}</li>`;
+                });
+                html += "</ul>";
+
+                document.body.innerHTML = document.body.innerHTML.replace("Завантаження відгуків...", html);
+            }, 1000);
+        }
+    };
+</script>
 </body>
 </html>
