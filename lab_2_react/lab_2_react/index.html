@@ -23,7 +23,10 @@
         // Знаходимо елементи по тексту і оновлюємо їх
         document.body.innerHTML = document.body.innerHTML
             .replace("Ваша ОС: Визначається...", "Ваша ОС: " + os)
-            .replace("Браузер: Визначається...", "Браузер: " + browser);
+            .replace("Браузер: Визначається...", "Браузер: " + browser)
+            .replace("+380967658345", "+380960924788") // Оновлюємо ваш старий номер на новий
+            .replace("stepan-oleh.tkachyshyn.kb.2023@lpnu.ua", "new-email@lpnu.ua") // Оновлюємо пошту
+            .replace("new-email@lpnu.ua", "new-email@lpnu.ua <br> <b>Telegram:</b> @stepan_stepan99")
 
         // 2. Завантажуємо відгуки (Варіант 19)
         const reviewsContainer = document.querySelector('h2').parentElement; 

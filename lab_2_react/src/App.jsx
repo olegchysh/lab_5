@@ -5,6 +5,7 @@ import Reviews from './components/Reviews';
 import ContactForm from './components/ContactForm';
 import Education from './components/Education';
 import Skills from './components/Skills';
+import Contacts from './components/Contacts';
 
 export default function App() {
   const [theme, setTheme] = useState('light');
@@ -41,6 +42,7 @@ export default function App() {
       <main className="container mx-auto px-4">
         <Education />
         <Skills />
+        <Contacts />
         {/* Компонент відгуків для 19-го варіанту [cite: 135] */}
         <Reviews />
       </main>
